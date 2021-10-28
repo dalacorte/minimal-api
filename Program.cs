@@ -1,6 +1,9 @@
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello World!");
+app.MapGet("/", () => {
+    var todo = new Todo(Guid.NewGuid(), "An awesome minimal api", true);
+    return Results.Ok(todo);
+});
 
 app.Run();
