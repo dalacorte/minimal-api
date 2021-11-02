@@ -1,11 +1,14 @@
+using Api.Data;
 using Api.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<AppDbContext>();
+
 var app = builder.Build();
 
-app.MapGet("/", () => {
-    var todo = new Todo(Guid.NewGuid(), "Todo", true);
-    return Results.Ok(todo);
+app.MapGet("v1/todos", (AppDbContext context) => {
+    var todos = context.Todos.ToList();
+    return Results.Ok(todos);
 });
 
 app.Run();
