@@ -1,1 +1,0 @@
-﻿public record Todo(Guid id, string Title, bool Done);
